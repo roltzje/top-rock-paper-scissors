@@ -2,16 +2,32 @@ let pwin = 0;
 let cwin = 0;
 let gameCounter = 0;
 
-const rock = document.querySelectorAll(".btn");
+const buttons = document.querySelectorAll(".btn");
 const body = document.querySelector("body");
 
 const results = document.createElement('div');
-body.appendChild(results);
+const score = document.createElement('div');
+const endgame = document.createElement('div');
 
-rock.forEach(element => element.addEventListener('click', () => {
+body.appendChild(results);
+body.appendChild(score);
+body.appendChild(endgame);
+
+
+buttons.forEach(element => element.addEventListener('click', () => {
     let player = element.id;
-    console.log(play(computerPlay(),player));
-    results.textContent = "The score is Computer-" + cwin + ", Player-" + pwin;
+    results.textContent = play(computerPlay(),player);
+    score.textContent = "The score is Computer-" + cwin + ", Player-" + pwin;
+    gameCounter++;
+    endgame.textContent = gameCounter;
+    if (pwin == 5 || cwin == 5) {
+        buttons.forEach(element => element.disabled = true);
+        if (pwin == 5) {
+            endgame.textContent = "Game over, you won!";
+        } else {
+            endgame.textContent = "Game over, you lost!";
+        }
+    }
 }));
 
 function computerPlay () {
