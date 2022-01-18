@@ -2,6 +2,18 @@ let pwin = 0;
 let cwin = 0;
 let gameCounter = 0;
 
+const rock = document.querySelectorAll(".btn");
+const body = document.querySelector("body");
+
+const results = document.createElement('div');
+body.appendChild(results);
+
+rock.forEach(element => element.addEventListener('click', () => {
+    let player = element.id;
+    console.log(play(computerPlay(),player));
+    results.textContent = "The score is Computer-" + cwin + ", Player-" + pwin;
+}));
+
 function computerPlay () {
     let chooser = Math.floor(Math.random()*3);
 
@@ -50,6 +62,9 @@ function play (computer, player) {
     }
 }  
 
+
+
+/*
 function game () {
     while (gameCounter < 5) {
         gameCounter++;
@@ -66,3 +81,4 @@ if (pwin > cwin) {
 }
 
 console.log(game());
+*/
